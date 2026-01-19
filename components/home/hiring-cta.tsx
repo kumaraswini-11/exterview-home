@@ -51,7 +51,12 @@ export function HiringCTA() {
         </h2>
 
         <div className="mt-14 flex justify-center">
-          <Button size="lg" className="rounded-full" aria-label="Book a demo">
+          <Button
+            size="lg"
+            animatedGradient
+            className="rounded-full"
+            aria-label="Book a demo"
+          >
             Book a Demo
           </Button>
         </div>

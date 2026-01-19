@@ -129,6 +129,7 @@
   }
 }
 
+/* Marquee Extraview text */
 @keyframes marquee {
   0% {
     transform: translateX(100%);
@@ -138,6 +139,7 @@
   }
 }
 
+/* Footer Exterview text glow */
 @keyframes glow-pulse {
   0%,
   100% {
@@ -153,4 +155,14 @@
 }
 .animate-glow-pulse {
   animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* Animated Gradient Border */
+@keyframes rainbow-slide {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 200% 50%;
+  }
 }

@@ -41,12 +41,35 @@ function Button({
   variant = "default",
   size = "default",
   asChild = false,
+  animatedGradient = false,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
+    animatedGradient?: boolean;
   }) {
   const Comp = asChild ? Slot : "button";
+
+  if (animatedGradient) {
+    return (
+      <span
+        className="relative inline-flex animate-[rainbow-slide_8s_linear_infinite] rounded-3xl p-0.5"
+        style={{
+          background:
+            "linear-gradient(270deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8f00ff, #ff0000)",
+          backgroundSize: "200% 100%",
+        }}
+      >
+        <Comp
+          data-slot="button"
+          data-variant={variant}
+          data-size={size}
+          className={cn(buttonVariants({ variant, size, className }))}
+          {...props}
+        />
+      </span>
+    );
+  }
 
   return (
     <Comp

@@ -176,10 +176,11 @@ export function AiSection() {
           </div>
 
           {/* CTA */}
-          <div className="text-center">
+          <div className="mt-8 text-center">
             <Button
               size="lg"
-              className="mt-8 rounded-full text-sm font-semibold"
+              animatedGradient
+              className="rounded-full text-sm font-semibold"
             >
               Book a Demo
             </Button>

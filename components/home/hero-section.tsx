@@ -83,7 +83,11 @@ export function HeroSection() {
         </h1>
 
         <div className="mb-12 flex justify-center gap-4">
-          <Button size="lg" className="rounded-full font-semibold">
+          <Button
+            size="lg"
+            animatedGradient
+            className="rounded-full font-semibold"
+          >
             Book a Demo
           </Button>
 

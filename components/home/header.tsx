@@ -93,7 +93,11 @@ export function Header() {
         {/* Actions */}
         <div className="flex items-center gap-3">
           {/* Desktop CTA */}
-          <Button size="lg" className="hidden rounded-full md:block">
+          <Button
+            size="lg"
+            animatedGradient
+            className="hidden rounded-full md:block"
+          >
             Book a Demo
           </Button>
 
@@ -123,7 +127,7 @@ export function Header() {
               <Button size="sm" className="rounded-full">
                 Sign Up
               </Button>
-              <Button size="sm" className="rounded-full">
+              <Button size="sm" animatedGradient className="rounded-full">
                 Book a Demo
               </Button>
             </div>
