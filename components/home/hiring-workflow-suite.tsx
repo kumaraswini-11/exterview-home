@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
+import { IMAGES } from "@/lib/constants";
 
 export function HiringWorkflowSuite() {
   return (
@@ -18,10 +19,10 @@ export function HiringWorkflowSuite() {
           </Button>
         </div>
 
-        {/* Diagram Image */}
+        {/* Workflow Diagram */}
         <div className="mt-12 flex justify-center">
           <Image
-            src="https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68ec89e17c9bd7423c5f6465_Group%201597882367-11-p-2000.png"
+            src={IMAGES.workflowDiagram}
             alt="Intelligent Hiring Workflow"
             width={1600}
             height={900}

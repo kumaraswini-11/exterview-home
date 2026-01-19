@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
+import { LAYOUT } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 const FEATURED_BLOG = {
   image:
@@ -11,7 +13,7 @@ const FEATURED_BLOG = {
   category: "AI Tools",
   title:
     "How Exterview.ai is Revolutionizing Talent Acquisition: From 30 Days to 3 Days",
-};
+} as const;
 
 const SIDE_BLOGS = [
   {
@@ -35,7 +37,7 @@ const SIDE_BLOGS = [
     title:
       "Use Cases & Success Stories: Transforming Hiring from Weeks to Days",
   },
-];
+] as const;
 
 function SideBlogCard({
   image,
@@ -49,7 +51,7 @@ function SideBlogCard({
   return (
     <Link
       href="#"
-      aria-label={`Read blog post ${title}`}
+      aria-label={`Read blog post: ${title}`}
       className="group flex items-center gap-4"
     >
       <Image
@@ -73,7 +75,9 @@ function SideBlogCard({
 
 export function BlogInsightsSection() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-12 md:px-16">
+    <section
+      className={cn("mx-auto px-4 py-12", LAYOUT.MAX_WIDTH, LAYOUT.PADDING_X)}
+    >
       {/* Header */}
       <div className="max-w-3xl">
         <Badge className="px-6 py-1.5 text-sm font-bold">Blogs</Badge>
@@ -98,7 +102,7 @@ export function BlogInsightsSection() {
             className="h-130 w-full object-cover"
           />
 
-          {/* Overlay */}
+          {/* Overlay Content */}
           <div className="absolute inset-x-3 bottom-3 rounded-[10px] bg-white/10 p-4 backdrop-blur-md">
             <Badge className="bg-black px-3 py-0.5 text-sm font-bold">
               {FEATURED_BLOG.category}

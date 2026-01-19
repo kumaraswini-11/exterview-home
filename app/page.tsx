@@ -1,5 +1,4 @@
 import { AiSection } from "@/components/home/ai-section";
-import { AutomationWorkflowSection } from "@/components/home/automation-workflow-section";
 import { BlogInsightsSection } from "@/components/home/blog-insights-section";
 import { FaqSection } from "@/components/home/faq-section";
 import { Footer } from "@/components/home/footer";
@@ -23,7 +22,6 @@ export default function HomePage() {
         <HeroSection />
         <HiringImpact />
         <HiringWorkflowSuite />
-        {/* <AutomationWorkflowSection /> */}
         <FraudProofSection />
         <ResultSection />
         <SolutionSection />

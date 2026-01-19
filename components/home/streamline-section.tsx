@@ -12,7 +12,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 
-const SLIDES = [
+const PROCESS_SLIDES = [
   {
     image:
       "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab75781_62d81c55e750b2364a0694b96850154b_work%20process%203-p-2000.png",
@@ -33,14 +33,14 @@ const SLIDES = [
     title: "Completed Interviews",
     description: "Measures how many interviews were successfully conducted.",
   },
-];
+] as const;
 
 export function StreamlineSection() {
   const [api, setApi] = useState<CarouselApi | undefined>();
 
   return (
     <section className="relative overflow-hidden bg-black bg-[url('https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab757b3_bg.avif')] bg-cover bg-center py-28">
-      {/* Background Word */}
+      {/* Background Animated Text */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <span className="animate-marquee text-[20vw] leading-none font-extrabold tracking-tight whitespace-nowrap text-white/10 select-none">
           Exterview
@@ -61,7 +61,7 @@ export function StreamlineSection() {
             className="rounded-4xl border border-white/15 bg-white/4 p-10 shadow-inner backdrop-blur-sm"
           >
             <CarouselContent className="-ml-4">
-              {SLIDES.map((slide, i) => (
+              {PROCESS_SLIDES.map((slide, i) => (
                 <CarouselItem key={i} className="basis-full">
                   <div>
                     <p className="text-xl text-white/70">
@@ -95,6 +95,7 @@ export function StreamlineSection() {
             size="icon-lg"
             onClick={() => api?.scrollPrev()}
             className="absolute bottom-1 -left-20 size-18 rounded-xl border border-white/20 bg-white/5 text-white hover:bg-white/10"
+            aria-label="Previous slide"
           >
             <ArrowLeft className="size-9 -rotate-45" />
           </Button>
@@ -103,6 +104,7 @@ export function StreamlineSection() {
             size="icon-lg"
             onClick={() => api?.scrollNext()}
             className="absolute -right-20 bottom-1 size-18 rounded-xl border border-white/20 bg-white/5 text-white hover:bg-white/10"
+            aria-label="Next slide"
           >
             <ArrowRight className="size-9 -rotate-45" />
           </Button>

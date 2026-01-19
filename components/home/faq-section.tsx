@@ -3,89 +3,13 @@
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
-import { Badge } from "@/components/ui/badge";
+import { SectionHeader } from "@/components/section-header";
+import { FAQS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-
-const FAQS = [
-  {
-    question: "What is Exterview?",
-    answer: (
-      <>
-        Exterview is an{" "}
-        <strong>AI Interview Talent Intelligence Platform</strong> that makes
-        hiring faster, fairer, and more effective.
-      </>
-    ),
-  },
-  {
-    question: "How does Exterview Job Creation work?",
-    answer: (
-      <>
-        Upload a JD or give a prompt. Our AI extracts skills, suggests missing
-        ones, shortlists candidates, and generates a ready-to-use JD and
-        interview flow in minutes.
-      </>
-    ),
-  },
-  {
-    question: "What makes Exterview screening process smarter?",
-    answer: (
-      <>
-        AI ranks candidates with instant match scores, predicts success, and
-        automates shortlisting and rejection.
-      </>
-    ),
-  },
-  {
-    question: "How do AI Avatar and Voice Interviews work?",
-    answer: (
-      <>
-        Candidates interact with 24/7 AI avatars or voice agents that run
-        interviews, analyze skills and sentiment, and generate reports.
-      </>
-    ),
-  },
-  {
-    question: "How is interview integrity ensured?",
-    answer: (
-      <>
-        Fraud detection includes face recognition, liveness checks, lip-sync
-        matching, tab-switch alerts, and secure recordings.
-      </>
-    ),
-  },
-  {
-    question: "What integrations are supported?",
-    answer: (
-      <>
-        Exterview integrates with 20+ ATS/HRMS platforms like Darwinbox,
-        Workday, SAP, Greenhouse, and more.
-      </>
-    ),
-  },
-  {
-    question: "How does Exterview mitigate bias?",
-    answer: (
-      <>
-        It removes personal identifiers, standardizes evaluations, and provides
-        real-time bias alerts to ensure fair hiring.
-      </>
-    ),
-  },
-  {
-    question: "How secure and compliant is Exterview?",
-    answer: (
-      <>
-        Fully compliant with SOC 2, ISO 27001, GDPR, and HIPAA with encryption,
-        MFA, and role-based access.
-      </>
-    ),
-  },
-];
 
 interface FaqItemProps {
   question: string;
-  answer: React.ReactNode;
+  answer: string;
   isOpen: boolean;
   onToggle: () => void;
 }
@@ -113,7 +37,7 @@ function FaqItem({ question, answer, isOpen, onToggle }: FaqItemProps) {
         />
       </div>
 
-      {/* Answer */}
+      {/* Answer with smooth expand/collapse */}
       <div
         className={cn(
           "grid transition-all duration-300 ease-in-out",
@@ -135,12 +59,11 @@ export function FaqSection() {
     <section className="bg-[#f3f8fe]">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-16">
         {/* Header */}
-        <div className="text-center">
-          <Badge className="px-6 py-1.5 text-sm font-bold">FAQs</Badge>
-          <h2 className="mt-4 text-[36px] leading-tight font-bold text-black md:text-[56px]">
-            Your Questions, Our Answers
-          </h2>
-        </div>
+        <SectionHeader
+          badge="FAQs"
+          title="Your Questions, Our Answers"
+          titleClassName="text-[36px] md:text-[56px]"
+        />
 
         {/* FAQ List */}
         <div className="mx-auto mt-12 space-y-5">

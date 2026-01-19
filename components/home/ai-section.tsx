@@ -5,9 +5,10 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { LAYOUT } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-const FEATURE_ITEMS = [
+const AI_FEATURES = [
   {
     title: "Expert Led Interview",
     desc: "Every interview is conducted by an experienced interviewer, ensuring a personal and tailored candidate experience.",
@@ -50,7 +51,7 @@ const FEATURE_ITEMS = [
     image:
       "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68ca486e3b69569cafc951e0_Untitled%20design%20(17).png",
   },
-];
+] as const;
 
 const INTEGRATIONS = [
   "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68f24028f3f780e0ffd67a15_image%2098.png",
@@ -68,13 +69,13 @@ const INTEGRATIONS = [
   "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68f23d2c39ac4d03966c2452_image%2017.png",
   "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68f23faf6aebd7880f57bd20_image%2020.png",
   "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/689c66c0316c9565ce19336e_logos-15.svg",
-];
+] as const;
 
 function FeatureCard({
   title,
   desc,
   image,
-  className = "",
+  className,
 }: {
   title: string;
   desc: string;
@@ -107,7 +108,14 @@ function FeatureCard({
 
 export function AiSection() {
   return (
-    <section className="mx-auto w-full max-w-7xl space-y-12 px-6 py-18 md:px-16">
+    <section
+      className={cn(
+        "mx-auto w-full space-y-12",
+        LAYOUT.MAX_WIDTH,
+        LAYOUT.PADDING_X,
+        LAYOUT.SECTION_SPACING,
+      )}
+    >
       {/* Header */}
       <div className="space-y-4 text-center">
         <Badge className="px-6 py-1.5 text-sm font-bold">AI</Badge>
@@ -116,33 +124,40 @@ export function AiSection() {
         </h2>
       </div>
 
-      {/* Row 1 */}
+      {/* Row 1 - Three equal columns */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {FEATURE_ITEMS.slice(0, 3).map((item) => (
+        {AI_FEATURES.slice(0, 3).map((item) => (
           <FeatureCard key={item.title} {...item} />
         ))}
       </div>
 
-      {/* Row 2 */}
+      {/* Row 2 - 2:3 split */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
-        <FeatureCard {...FEATURE_ITEMS[3]} className="lg:col-span-2" />
-        <FeatureCard {...FEATURE_ITEMS[4]} className="lg:col-span-3" />
+        <FeatureCard {...AI_FEATURES[3]} className="lg:col-span-2" />
+        <FeatureCard {...AI_FEATURES[4]} className="lg:col-span-3" />
       </div>
 
-      {/* Row 3 */}
+      {/* Row 3 - Two equal columns */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {FEATURE_ITEMS.slice(5, 7).map((item) => (
+        {AI_FEATURES.slice(5, 7).map((item) => (
           <FeatureCard key={item.title} {...item} />
         ))}
       </div>
 
-      {/* Integrations */}
+      {/* Integrations Section */}
       <div className="-mx-6 w-auto bg-[url('https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab75775_integration%20bg%20effect.avif')] bg-cover bg-center py-12 md:-mx-16">
-        <div className="mx-auto max-w-7xl space-y-6 px-6 md:px-16">
+        <div
+          className={cn(
+            "mx-auto space-y-6",
+            LAYOUT.MAX_WIDTH,
+            LAYOUT.PADDING_X,
+          )}
+        >
           <h4 className="text-center text-5xl font-semibold text-black">
             Seamlessly Integrated with HRMS & <br /> ATS Platforms
           </h4>
 
+          {/* Integration Logos Grid */}
           <div className="grid grid-cols-5 place-items-center gap-3">
             {INTEGRATIONS.map((src, i) => (
               <div
@@ -151,7 +166,7 @@ export function AiSection() {
               >
                 <Image
                   src={src}
-                  alt={`INTEGRATION ${i + 1}`}
+                  alt={`Integration ${i + 1}`}
                   width={64}
                   height={64}
                   className="object-contain"
@@ -160,6 +175,7 @@ export function AiSection() {
             ))}
           </div>
 
+          {/* CTA */}
           <div className="text-center">
             <Button
               size="lg"

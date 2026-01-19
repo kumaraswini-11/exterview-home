@@ -7,10 +7,34 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-import { Badge } from "@/components/ui/badge";
+import { SectionHeader } from "@/components/section-header";
 import { Card, CardContent } from "@/components/ui/card";
+import { LAYOUT } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
-const logos = [
+const FEATURES = [
+  {
+    icon: SlidersHorizontalIcon,
+    title: "Live Hiring KPIs",
+    description:
+      "Visualize and track every stage of the sales process. Help users manage leads.",
+  },
+  {
+    icon: CalendarIcon,
+    title: "Predictive Hiring Analytics",
+    description:
+      "Reduces manual effort and increases team efficiency. Focus on leads most likely to convert and saving time.",
+  },
+  {
+    icon: MilestoneIcon,
+    title: "24/7 AI Chatbot Support",
+    description:
+      "Detailed sales insights with performance metrics, forecasts, and customizable reports.",
+  },
+] as const;
+
+// Compliance/certification logos
+const COMPLIANCE_LOGOS = [
   {
     src: "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68f24103b7e55eca70579885_Vector.png",
     alt: "VAPT",
@@ -43,7 +67,7 @@ const logos = [
     src: "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68f24169221daaea94511a19_image%2023.png",
     alt: "Compliance",
   },
-];
+] as const;
 
 function FeatureItem({
   icon: Icon,
@@ -65,7 +89,7 @@ function FeatureItem({
         <h3 className="text-2xl font-medium text-black">{title}</h3>
       </div>
 
-      {/* Description aligned from icon */}
+      {/* Description */}
       <p className="ml-3 text-base text-black/80">{description}</p>
     </div>
   );
@@ -73,42 +97,29 @@ function FeatureItem({
 
 export function SolutionSection() {
   return (
-    <section className="mx-auto w-full max-w-7xl px-6 py-18 md:px-16">
+    <section
+      className={cn(
+        "mx-auto w-full",
+        LAYOUT.MAX_WIDTH,
+        LAYOUT.PADDING_X,
+        LAYOUT.SECTION_SPACING,
+      )}
+    >
       {/* Header */}
-      <div className="mb-12 text-center">
-        <Badge className="px-6 py-1.5 text-sm font-bold">Solutions</Badge>
+      <SectionHeader badge="Solutions" title="Solutions for Your Enterprise" />
 
-        <h2 className="mt-4 text-[48px] font-semibold text-black capitalize">
-          Solutions for Your Enterprise
-        </h2>
-      </div>
-
-      {/* Content */}
+      {/* Content Grid */}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        {/* Left Card*/}
+        {/* Left Card - Features */}
         <Card className="rounded-4xl bg-[#f3f3f3] shadow-none">
           <CardContent className="space-y-10 p-6">
-            <FeatureItem
-              icon={SlidersHorizontalIcon}
-              title="Live Hiring KPIs"
-              description="Visualize and track every stage of the sales process. Help users manage leads."
-            />
-
-            <FeatureItem
-              icon={CalendarIcon}
-              title="Predictive Hiring Analytics"
-              description="Reduces manual effort and increases team efficiency. Focus on leads most likely to convert and saving time."
-            />
-
-            <FeatureItem
-              icon={MilestoneIcon}
-              title="24/7 AI Chatbot Support"
-              description="Detailed sales insights with performance metrics, forecasts, and customizable reports."
-            />
+            {FEATURES.map((feature) => (
+              <FeatureItem key={feature.title} {...feature} />
+            ))}
           </CardContent>
         </Card>
 
-        {/* Right Card */}
+        {/* Right Card - Client Satisfaction */}
         <Card className="rounded-4xl bg-black text-white shadow-none">
           <CardContent className="flex flex-row gap-12 p-8">
             {/* Left Text Block */}
@@ -126,9 +137,9 @@ export function SolutionSection() {
               </p>
             </div>
 
-            {/* Logos Grid */}
+            {/* Compliance Logos Grid */}
             <div className="grid flex-1 grid-cols-2 place-items-center gap-6">
-              {logos.map((logo) => (
+              {COMPLIANCE_LOGOS.map((logo) => (
                 <Image
                   key={logo.alt}
                   src={logo.src}

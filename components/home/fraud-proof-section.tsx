@@ -4,16 +4,17 @@ import { AudioWaveformIcon, Link2Icon, UserIcon } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
+import { SectionHeader } from "@/components/section-header";
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
+import { LAYOUT } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-const acrd = [
+const INTERVIEW_TYPES = [
   {
     icon: AudioWaveformIcon,
     question: "AI Voice Interview",
@@ -32,22 +33,30 @@ const acrd = [
     image:
       "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68cabb799d7b688e6fe92846_Ouestion%20screen%204-p-2000.png",
   },
-];
+] as const;
 
 export function FraudProofSection() {
   const [openItem, setOpenItem] = useState<string | undefined>();
 
   return (
-    <section className="mx-auto w-full max-w-7xl py-18 md:px-16">
+    <section
+      className={cn(
+        "mx-auto w-full",
+        LAYOUT.MAX_WIDTH,
+        LAYOUT.SECTION_SPACING,
+        LAYOUT.PADDING_X,
+      )}
+    >
       {/* Header */}
-      <div className="mb-12 text-center">
-        <Badge className="px-6 py-1.5 text-sm font-bold">Fraud Proof</Badge>
-
-        <h2 className="mt-4 text-[48px] font-semibold text-black capitalize">
-          AI-Assisted L1 and L2 Human <br />
-          Interviews, Secured and Fraud Proof.
-        </h2>
-      </div>
+      <SectionHeader
+        badge="Fraud Proof"
+        title={
+          <>
+            AI-Assisted L1 and L2 Human <br />
+            Interviews, Secured and Fraud Proof.
+          </>
+        }
+      />
 
       {/* Accordion */}
       <Accordion
@@ -57,14 +66,14 @@ export function FraudProofSection() {
         onValueChange={setOpenItem}
         className="space-y-4"
       >
-        {acrd.map((item, index) => {
+        {INTERVIEW_TYPES.map((item, index) => {
           const Icon = item.icon;
           const value = `item-${index}`;
           const isOpen = openItem === value;
 
           return (
             <div key={value} className="flex w-full items-start gap-5">
-              {/* Left Icon */}
+              {/* Left Icon Indicator */}
               <div
                 className={cn(
                   "flex size-12 shrink-0 items-center justify-center rounded-lg transition-colors duration-200",
@@ -81,7 +90,7 @@ export function FraudProofSection() {
               {/* Accordion Item */}
               <div className="flex-1">
                 <AccordionItem value={value} className="w-full">
-                  {/* Header Row */}
+                  {/* Header */}
                   <AccordionTrigger
                     className={cn(
                       "flex items-center justify-between rounded-lg bg-gray-200 px-4 py-4 transition-colors duration-200",

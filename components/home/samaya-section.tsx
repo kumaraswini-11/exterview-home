@@ -1,24 +1,29 @@
 import Image from "next/image";
 
-import { Badge } from "@/components/ui/badge";
+import { SectionHeader } from "@/components/section-header";
+import { IMAGES, LAYOUT } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 export function SamayaSection() {
   return (
-    <section className="mx-auto max-w-7xl pt-16 md:px-16">
+    <section
+      className={cn("mx-auto pt-16", LAYOUT.MAX_WIDTH, LAYOUT.PADDING_X)}
+    >
       {/* Header */}
-      <div className="text-center">
-        <Badge className="px-6 py-1.5 text-sm font-bold">Samay</Badge>
+      <SectionHeader
+        badge="Samay"
+        title={
+          <>
+            Meet Smaya. Your AI Agent For End To End <br />
+            Recruitment Activities
+          </>
+        }
+      />
 
-        <h2 className="mt-4 text-[48px] leading-tight font-semibold text-black">
-          Meet Smaya. Your AI Agent For End To End <br />
-          Recruitment Activities
-        </h2>
-      </div>
-
-      {/* Image */}
+      {/* Hero Image */}
       <Image
-        src="https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68cac43949a62a453deb5ba1_bento%20image%20for%20key%20features.png"
-        alt="Samaya Section Image"
+        src={IMAGES.samayaBento}
+        alt="Samaya AI Agent Interface"
         width={1920}
         height={1080}
         className="mt-5 inline-block w-full object-contain"

@@ -6,51 +6,43 @@ import { useEffect, useRef } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { FLOATING_ICONS, IMAGES } from "@/lib/constants";
 
-const FLOATING_ICONS = [
-  {
-    src: "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab756fb_Hero%20Icon%2006.svg",
-    top: "12%",
-    left: "10%",
-    rotate: -15,
-  },
-  {
-    src: "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab75708_Hero%20Icon%2001.svg",
-    top: "40%",
-    left: "8%",
-    rotate: 10,
-  },
-  {
-    src: "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab756eb_Hero%20Icon%2002.svg",
-    top: "40%",
-    left: "8%",
-    rotate: 10,
-  },
-  {
-    src: "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab75714_Hero%20Icon%2004.svg",
-    top: "15%",
-    right: "12%",
-    rotate: 12,
-  },
-  {
-    src: "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab756fd_Hero%20Icon%2003.svg",
-    top: "45%",
-    right: "8%",
-    rotate: -8,
-  },
-  {
-    src: "https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab756ea_Hero%20Icon%2005.svg",
-    top: "40%",
-    left: "8%",
-    rotate: 10,
-  },
-];
+interface FloatingIconProps {
+  src: string;
+  top: string;
+  left?: string;
+  right?: string;
+  rotate?: number;
+  controls: ReturnType<typeof useAnimation>;
+}
 
-export const HeroSection = () => {
+const FloatingIcon = ({
+  src,
+  top,
+  left,
+  right,
+  rotate = 0,
+  controls,
+}: FloatingIconProps) => (
+  <motion.div
+    initial={{ y: 0, rotate }}
+    animate={controls}
+    transition={{ type: "spring", stiffness: 60, damping: 15 }}
+    className="absolute hidden size-26 items-center justify-center rounded-xl border border-white/20 bg-white/10 p-4 shadow-2xl backdrop-blur-md lg:flex"
+    style={{ top, left, right }}
+  >
+    <div className="relative h-full w-full">
+      <Image src={src} alt="Hero Icon" fill className="object-contain p-1" />
+    </div>
+  </motion.div>
+);
+
+export function HeroSection() {
   const controls = useAnimation();
   const lastScrollY = useRef(0);
 
-  // Detect scroll direction
+  // Scroll-based animation for floating icons
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -71,8 +63,7 @@ export const HeroSection = () => {
     <section
       className="relative mx-auto my-8 flex min-h-[85vh] w-full max-w-[96.5%] flex-col items-center justify-start overflow-visible rounded-4xl bg-cover bg-center py-4 pt-20 shadow-2xl"
       style={{
-        backgroundImage:
-          "url('https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68763d3bb7c300bc9ab75792_Nothingness%20in%20Blur%2020.avif')",
+        backgroundImage: `url('${IMAGES.heroBackground}')`,
       }}
     >
       {/* Floating Icons */}
@@ -106,13 +97,13 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      {/* Dashboard Preview */}
+      {/* Dashboard Preview with perspective */}
       <div
         className="relative mt-auto mb-12 w-full max-w-5xl overflow-visible rounded-t-3xl px-4 shadow-2xl"
         style={{ perspective: 1000 }}
       >
         <Image
-          src="https://cdn.prod.website-files.com/68763d3ab7c300bc9ab75527/68d1421249aeb654630f721b_Step-7-p-2000.png"
+          src={IMAGES.dashboardPreview}
           alt="Dashboard Preview"
           width={2000}
           height={1200}
@@ -122,34 +113,4 @@ export const HeroSection = () => {
       </div>
     </section>
   );
-};
-
-interface FloatingIconProps {
-  src: string;
-  top: string;
-  left?: string;
-  right?: string;
-  rotate?: number;
-  controls: ReturnType<typeof useAnimation>;
 }
-
-const FloatingIcon = ({
-  src,
-  top,
-  left,
-  right,
-  rotate = 0,
-  controls,
-}: FloatingIconProps) => (
-  <motion.div
-    initial={{ y: 0, rotate }}
-    animate={controls}
-    transition={{ type: "spring", stiffness: 60, damping: 15 }}
-    className="absolute hidden size-26 items-center justify-center rounded-xl border border-white/20 bg-white/10 p-4 shadow-2xl backdrop-blur-md lg:flex"
-    style={{ top, left, right }}
-  >
-    <div className="relative h-full w-full">
-      <Image src={src} alt="Hero Icon" fill className="object-contain p-1" />
-    </div>
-  </motion.div>
-);

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { Badge } from "@/components/ui/badge";
+import { SectionHeader } from "@/components/section-header";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,24 +12,25 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
+import { LAYOUT } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
-export function ResultSection() {
-  const [hires, setHires] = useState(50);
-  const [apps, setApps] = useState(50);
-  const [timePer, setTimePer] = useState(50);
+interface SliderControlProps {
+  label: string;
+  value: number;
+  onChange: (v: number) => void;
+  max?: number;
+  min?: number;
+}
 
-  // Calculated values
-  const hoursSaved = Math.round((hires * apps * timePer) / 10000);
-  const percent = Math.min(Math.round((hoursSaved / 100) * 100), 100);
-
-  // Helper function for sliders
-  const renderSlider = (
-    label: string,
-    value: number,
-    onChange: (v: number) => void,
-    max = 100,
-    min = 0,
-  ) => (
+function SliderControl({
+  label,
+  value,
+  onChange,
+  max = 100,
+  min = 0,
+}: SliderControlProps) {
+  return (
     <div className="space-y-2">
       <div className="flex justify-between">
         <label className="text-sm font-medium text-black">{label}</label>
@@ -45,19 +46,31 @@ export function ResultSection() {
       />
     </div>
   );
+}
+
+export function ResultSection() {
+  const [hires, setHires] = useState(50);
+  const [apps, setApps] = useState(50);
+  const [timePer, setTimePer] = useState(50);
+
+  // Calculate metrics
+  const hoursSaved = Math.round((hires * apps * timePer) / 10000);
+  const percent = Math.min(Math.round((hoursSaved / 100) * 100), 100);
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-6 py-18 md:px-16">
+    <section
+      className={cn(
+        "mx-auto w-full",
+        LAYOUT.MAX_WIDTH,
+        LAYOUT.PADDING_X,
+        LAYOUT.SECTION_SPACING,
+      )}
+    >
       {/* Header */}
-      <div className="mb-12 text-center">
-        <Badge className="px-6 py-1.5 text-sm font-bold">Result</Badge>
-        <h2 className="mt-4 text-[48px] font-semibold text-black capitalize">
-          Drive Measurable Results
-        </h2>
-      </div>
+      <SectionHeader badge="Result" title="Drive Measurable Results" />
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        {/* Left Card */}
+        {/* Left Card - Input Controls */}
         <Card className="rounded-3xl shadow-lg">
           <CardHeader>
             <h5 className="text-[28px] font-semibold text-black">
@@ -68,17 +81,21 @@ export function ResultSection() {
           <Separator className="my-2 w-full" />
 
           <CardContent className="space-y-8">
-            {renderSlider(
-              "Planned hires in the next 12 months",
-              hires,
-              setHires,
-            )}
-            {renderSlider("Number of applicants per position", apps, setApps)}
-            {renderSlider(
-              "Average time spent on screening candidates",
-              timePer,
-              setTimePer,
-            )}
+            <SliderControl
+              label="Planned hires in the next 12 months"
+              value={hires}
+              onChange={setHires}
+            />
+            <SliderControl
+              label="Number of applicants per position"
+              value={apps}
+              onChange={setApps}
+            />
+            <SliderControl
+              label="Average time spent on screening candidates"
+              value={timePer}
+              onChange={setTimePer}
+            />
           </CardContent>
 
           <Separator className="my-2 w-full" />
@@ -90,7 +107,7 @@ export function ResultSection() {
           </CardFooter>
         </Card>
 
-        {/* Right Card */}
+        {/* Right Card - Results Display */}
         <Card className="rounded-3xl bg-blue-600 text-white shadow-lg">
           <CardHeader>
             <h3 className="text-[28px] font-semibold">
