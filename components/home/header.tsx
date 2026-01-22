@@ -102,7 +102,7 @@ export function Header() {
           >
             Book a Demo
           </Button>
-          
+
           {/* Theme Switcher */}
           <ThemeSwitcher />
 

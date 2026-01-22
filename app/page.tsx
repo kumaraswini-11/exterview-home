@@ -12,8 +12,24 @@ import { ResultSection } from "@/components/home/result-section";
 import { SamayaSection } from "@/components/home/samaya-section";
 import { SolutionSection } from "@/components/home/solution-section";
 import { StreamlineSection } from "@/components/home/streamline-section";
+import { LiveWaveformDemo } from "@/components/voice-agent/live-waveform-demo";
 
 export default function HomePage() {
+  // Rounded Animated Waveform
+  return (
+    <main className="flex min-h-screen w-full flex-col items-center justify-center bg-zinc-50/50 p-4 dark:bg-zinc-950">
+      <div className="mx-auto w-full max-w-lg">
+        <LiveWaveformDemo />
+      </div>
+
+      {/* Optional: Footer hint for UX */}
+      <p className="text-muted-foreground mt-6 text-center text-xs">
+        Ensure microphone permissions are enabled in your browser.
+      </p>
+    </main>
+  );
+
+  // Exterview Home UI Screen
   return (
     <>
       <Header />
