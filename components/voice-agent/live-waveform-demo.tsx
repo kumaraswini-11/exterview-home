@@ -82,7 +82,7 @@ export function LiveWaveformDemo() {
         </div>
 
         {/* Transcript Box */}
-        {/* <div className="space-y-2">
+        <div className="space-y-2">
           <div className="flex items-center justify-between px-1">
             <label className="text-muted-foreground text-[10px] font-bold tracking-widest uppercase">
               Live Transcript
@@ -110,7 +110,7 @@ export function LiveWaveformDemo() {
               )}
             </div>
           </ScrollArea>
-        </div> */}
+        </div>
 
         {/* Action Button */}
         <Button
